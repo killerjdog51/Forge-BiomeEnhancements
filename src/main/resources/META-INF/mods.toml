@@ -1,0 +1,47 @@
+
+modLoader="javafml" #mandatory
+
+loaderVersion="[28,)" #mandatory (28 is current forge version)
+
+issueTrackerURL="http://my.issue.tracker/" #optional
+
+[[mods]] #mandatory
+
+modId="biome_enhancements" #mandatory
+
+version="1.14.4-1.0.0" #mandatory
+
+displayName="Biome Enhanements Mod" #mandatory
+
+#updateJSONURL="http://myurl.me/" #optional
+
+#displayURL="http://example.com/" #optional
+
+#logoFile="examplemod.png" #optional
+
+credits="Thank you towards Mojang for an incredible game, the community for their feedback and ideas, and Pererillo for helping create the textures" #optional
+
+authors="killerjdog51" #optional
+
+description='''
+This is a mod focused on improving the already existing biomes within the game. More specifically, it focuses on the features discussed on the Minecraft feedback site and showcased within the animated Biome Chooser videos on Youtube.
+'''
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.biome_enhancements]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[28,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.biome_enhancements]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"

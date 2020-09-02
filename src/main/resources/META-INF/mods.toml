@@ -17,9 +17,9 @@ displayName="Biome Enhanements Mod" #mandatory
 
 #displayURL="http://example.com/" #optional
 
-#logoFile="examplemod.png" #optional
+#logoFile="assets/biome_enhancements/icon.png" #optional
 
-credits="Thank you towards Mojang for an incredible game, the community for their feedback and ideas, and Pererillo for helping create the textures" #optional
+credits="Thank you towards Mojang for an incredible game, the community for their feedback and ideas, and both Pererillo and AgentTrip for helping create the textures" #optional
 
 authors="killerjdog51" #optional
 

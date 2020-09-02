@@ -19,7 +19,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 public class OasisBiome extends Biome {
 
 	public OasisBiome() {
-	      super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(-0.1F).scale(0.00F).temperature(0.95F).downfall(0.9F).waterColor(4159204).waterFogColor(329011).parent("desert"));
+	      super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(-0.1F).scale(0.00F).temperature(0.95F).downfall(0.9F).waterColor(4566514).waterFogColor(267827));
 
 	      this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
 	      this.addStructure(Feature.STRONGHOLD, IFeatureConfig.NO_FEATURE_CONFIG);

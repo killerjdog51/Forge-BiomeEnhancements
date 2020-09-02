@@ -16,14 +16,15 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeType;
 
 
 public class WorldGeneration {
 
+	// Register our biome to exist
 	public static Biome OASIS = new OasisBiome();
 	
-	public static void registerBiome(Biome biome, int weight, BiomeType type, Type... types)
+	// Since Forge has it's own registry thing, we need to add our Biome to the Biome Dictionary/Manager
+	public static void registerBiome(Biome biome, Type... types)
 	{
 		BiomeDictionary.addTypes(biome, types);
 		BiomeManager.addSpawnBiome(biome);
@@ -31,13 +32,23 @@ public class WorldGeneration {
 	
 	public static void init()
 	{
+		// Uses reflection to remove Minecraft swamp trees from Swamp generation
+		// This works in Forge because we're looking for the class/instance instead of a field (Classes/instances can not be obfuscated)
+		// Gets all vegetation features for the Swamp biome
 		Iterator<ConfiguredFeature<?>> it = Biomes.SWAMP.getFeatures(Decoration.VEGETAL_DECORATION).iterator();
-		while(it.hasNext()) {
+		
+		// Iterates through each feature
+		while(it.hasNext())
+		{
 			ConfiguredFeature<?> feature = it.next();
-			if(feature.config instanceof DecoratedFeatureConfig) {
+			
+			// Checks if the feature is the swamp tree
+			if(feature.config instanceof DecoratedFeatureConfig)
+			{
 				DecoratedFeatureConfig dfconfig = (DecoratedFeatureConfig)feature.config;
-				if(dfconfig.feature.config instanceof IFeatureConfig) {
-					Feature featureconfig = dfconfig.feature.feature;
+				if(dfconfig.feature.config instanceof IFeatureConfig)
+				{
+					Feature<?> featureconfig = dfconfig.feature.feature;
 					if(featureconfig == Feature.SWAMP_TREE)
 					{
 						it.remove();
@@ -47,13 +58,22 @@ public class WorldGeneration {
 			}
 		}
 		
+		// Uses reflection to remove Minecraft swamp trees from Swamp hills generation
+		// Gets all vegatation features for the swamp biome
 		it = Biomes.SWAMP_HILLS.getFeatures(Decoration.VEGETAL_DECORATION).iterator();
-		while(it.hasNext()) {
+		
+		// Iterates through each feature
+		while(it.hasNext())
+		{
 			ConfiguredFeature<?> feature = it.next();
-			if(feature.config instanceof DecoratedFeatureConfig) {
+			
+			// Checks if the feature is the swamp tree
+			if(feature.config instanceof DecoratedFeatureConfig)
+			{
 				DecoratedFeatureConfig dfconfig = (DecoratedFeatureConfig)feature.config;
-				if(dfconfig.feature.config instanceof IFeatureConfig) {
-					Feature featureconfig = dfconfig.feature.feature;
+				if(dfconfig.feature.config instanceof IFeatureConfig)
+				{
+					Feature<?> featureconfig = dfconfig.feature.feature;
 					if(featureconfig == Feature.SWAMP_TREE)
 					{
 						it.remove();
@@ -63,6 +83,7 @@ public class WorldGeneration {
 			}
 		}
 			
+		// Adds mangrove trees to the Swamp
 		Biomes.SWAMP.addFeature(
 		                Decoration.VEGETAL_DECORATION,
 		                Biome.createDecoratedFeature(
@@ -72,6 +93,7 @@ public class WorldGeneration {
 		                        new AtSurfaceWithExtraConfig(2, 0.1F, 1))
 		        );
 		
+		// Adds mangrove trees to the Swamp Hills
 		Biomes.SWAMP_HILLS.addFeature(
                 Decoration.VEGETAL_DECORATION,
                 Biome.createDecoratedFeature(
@@ -81,6 +103,7 @@ public class WorldGeneration {
                         new AtSurfaceWithExtraConfig(2, 0.1F, 1))
         );
 		
+		// Adds baobab trees to the Savanna
 		Biomes.SAVANNA.addFeature(
 		                Decoration.VEGETAL_DECORATION,
 		                Biome.createDecoratedFeature(
@@ -91,6 +114,7 @@ public class WorldGeneration {
 		        );
 		
 		
+		// Adds palm trees to beaches
 		Biomes.BEACH.addFeature(
                 Decoration.VEGETAL_DECORATION,
                 Biome.createDecoratedFeature(
@@ -99,10 +123,8 @@ public class WorldGeneration {
                         Placement.COUNT_EXTRA_HEIGHTMAP,
                         new AtSurfaceWithExtraConfig(0, 0.06F, 1))
         );
-			
-		//Biomes.DESERT.addStructure(WorldFeatures.OASIS, IFeatureConfig.NO_FEATURE_CONFIG);
-		
-		
+					
+		// Adds oasis to the desert
 		Biomes.DESERT.addFeature(
                 Decoration.LOCAL_MODIFICATIONS,
                 Biome.createDecoratedFeature(

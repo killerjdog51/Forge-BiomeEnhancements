@@ -1,28 +1,35 @@
 package io.github.killerjdog51.biome_enhancments.util;
 
 import io.github.killerjdog51.biome_enhancments.BiomeEnhancements;
+import io.github.killerjdog51.biome_enhancments.entity.boat.ModBoatEntity;
+import io.github.killerjdog51.biome_enhancments.entity.boat.ModBoatRenderer;
 import io.github.killerjdog51.biome_enhancments.init.ModBlocks;
+import io.github.killerjdog51.biome_enhancments.init.ModEntityTypes;
 import io.github.killerjdog51.biome_enhancments.init.ModItems;
 import io.github.killerjdog51.biome_enhancments.init.ModTileEntityTypes;
 import io.github.killerjdog51.biome_enhancments.init.WorldGeneration;
 import io.github.killerjdog51.biome_enhancments.tileentity.ModSignTileEntity;
 import io.github.killerjdog51.biome_enhancments.tileentity.ModSignTileEntityRenderer;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+// Forge uses it's own registry instead of allowing programmers to interact with Minecraft's registry
 public class RegistryHandler {
 
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, BiomeEnhancements.MOD_ID);
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, BiomeEnhancements.MOD_ID);
 	public static final DeferredRegister<Biome> BIOMES = new DeferredRegister<>(ForgeRegistries.BIOMES, BiomeEnhancements.MOD_ID);
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, BiomeEnhancements.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, BiomeEnhancements.MOD_ID);
 
 	public static void init()
 	{
@@ -30,7 +37,7 @@ public class RegistryHandler {
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		TILE_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-		ClientRegistry.bindTileEntitySpecialRenderer(ModSignTileEntity.class, new ModSignTileEntityRenderer());
+		ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 	}
 	//Items
@@ -110,6 +117,9 @@ public class RegistryHandler {
 		public static final RegistryObject<Block> BAOBAB_TRAPDOOR = BLOCKS.register("baobab_trapdoor", () -> ModBlocks.BAOBAB_TRAPDOOR);
 		public static final RegistryObject<Block> MANGROVE_TRAPDOOR = BLOCKS.register("mangrove_trapdoor", () -> ModBlocks.MANGROVE_TRAPDOOR);
 		public static final RegistryObject<Block> PALM_TRAPDOOR = BLOCKS.register("palm_trapdoor", () -> ModBlocks.PALM_TRAPDOOR);
+		
+		public static final RegistryObject<Block> COCONUT = BLOCKS.register("coconut", () -> ModBlocks.COCONUT);
+		public static final RegistryObject<Block> DATES = BLOCKS.register("dates", () -> ModBlocks.DATES);
 
 	//ItemBlocks
 		public static final RegistryObject<Item> BAOBAB_PLANKS_ITEM = ITEMS.register("baobab_planks", () -> ModItems.BAOBAB_PLANKS);
@@ -178,9 +188,16 @@ public class RegistryHandler {
 		public static final RegistryObject<Item> MANGROVE_TRAPDOOR_ITEM = ITEMS.register("mangrove_trapdoor", () -> ModItems.MANGROVE_TRAPDOOR);
 		public static final RegistryObject<Item> PALM_TRAPDOOR_ITEM = ITEMS.register("palm_trapdoor", () -> ModItems.PALM_TRAPDOOR);
 		
+		public static final RegistryObject<Item> BAOBAB_BOAT_ITEM = ITEMS.register("baobab_boat", () -> ModItems.BAOBAB_BOAT);
+		public static final RegistryObject<Item> MANGROVE_BOAT_ITEM = ITEMS.register("mangrove_boat", () -> ModItems.MANGROVE_BOAT);
+		public static final RegistryObject<Item> PALM_BOAT_ITEM = ITEMS.register("palm_boat", () -> ModItems.PALM_BOAT);
+		
 		//Biomes
 		public static final RegistryObject<Biome> OASIS_BIOME = BIOMES.register("oasis",  () -> WorldGeneration.OASIS);
 		
 		//Tile Entities
 		public static final RegistryObject<TileEntityType<ModSignTileEntity>> SIGN = TILE_ENTITY_TYPES.register("sign", () -> ModTileEntityTypes.SIGN);
+		
+		// Entities
+		public static final RegistryObject<EntityType<ModBoatEntity>> BOAT = ENTITY_TYPES.register("boat", () -> ModEntityTypes.BOAT);
 }

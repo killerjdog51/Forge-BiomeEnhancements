@@ -29,6 +29,7 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.potion.Effects;
+import net.minecraftforge.common.ToolType;
 
 @SuppressWarnings("deprecation")
 public class ModBlocks {
@@ -84,9 +85,9 @@ public class ModBlocks {
 	public static final Block MANGROVE_PRESSURE_PLATE = new ModPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
 	public static final Block PALM_PRESSURE_PLATE = new ModPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD, MaterialColor.SAND).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
 	
-	public static final Block BAOBAB_BUTTON = new ModWoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
-	public static final Block MANGROVE_BUTTON = new ModWoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
-	public static final Block PALM_BUTTON = new ModWoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+	public static final Block BAOBAB_BUTTON = new ModWoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).harvestTool(ToolType.AXE).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+	public static final Block MANGROVE_BUTTON = new ModWoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).harvestTool(ToolType.AXE).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
+	public static final Block PALM_BUTTON = new ModWoodButtonBlock(Block.Properties.create(Material.MISCELLANEOUS).harvestTool(ToolType.AXE).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD));
 	
 	public static final Block POTTED_BAOBAB_SAPLING = new FlowerPotBlock(BAOBAB_SAPLING, Block.Properties.from(Blocks.FLOWER_POT));
 	public static final Block POTTED_MANGROVE_SAPLING = new FlowerPotBlock(MANGROVE_SAPLING, Block.Properties.from(Blocks.FLOWER_POT));
@@ -108,5 +109,9 @@ public class ModBlocks {
 	public static final Block MANGROVE_DOOR = new ModDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.OBSIDIAN).hardnessAndResistance(3.0F).sound(SoundType.WOOD));
 	public static final Block PALM_DOOR = new ModDoorBlock(Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(3.0F).sound(SoundType.WOOD));
 
+
+	// These are just placeholders until I officially implement these crops. 
+	public static final Block COCONUT = new Block(Block.Properties.from(Blocks.COCOA));
+	public static final Block DATES = new Block(Block.Properties.from(Blocks.COCOA));
 
 }

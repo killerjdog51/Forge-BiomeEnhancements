@@ -4,21 +4,28 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+import io.github.killerjdog51.biome_enhancments.init.ModBlocks;
+
 public class PalmLeavesBlock extends LeavesBlock {
 	   public static final IntegerProperty NEWDISTANCE = IntegerProperty.create("newdistance", 1, 11);
+	   public static final EnumProperty<Type> TYPE = EnumProperty.create("type", PalmLeavesBlock.Type.class);
+
 
 	   public PalmLeavesBlock(Block.Properties properties) {
 	      super(properties);
-	      this.setDefaultState(this.stateContainer.getBaseState().with(NEWDISTANCE, Integer.valueOf(11)).with(PERSISTENT, Boolean.valueOf(false)));
+	      this.setDefaultState(this.stateContainer.getBaseState().with(NEWDISTANCE, Integer.valueOf(11)).with(PERSISTENT, Boolean.valueOf(false)).with(TYPE, PalmLeavesBlock.Type.NORMAL));
 	   }
 
 	   @Override
@@ -79,6 +86,57 @@ public class PalmLeavesBlock extends LeavesBlock {
 	   @Override
 	   protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 	      builder.add(NEWDISTANCE);
+	      builder.add(TYPE);
 	      super.fillStateContainer(builder);
 	   }
+	   
+	// We want Palm trees to grow two different crops (or no crops too)
+	   public static enum Type implements IStringSerializable{
+		      NORMAL(Blocks.AIR, "normal"),
+		      COCONUT(ModBlocks.COCONUT, "coconut"),
+		      DATE(ModBlocks.DATES, "date");
+
+		      private final String name;
+		      private final Block baseBlock;
+
+		      private Type(Block block, String string2) {
+		         this.name = string2;
+		         this.baseBlock = block;
+		      }
+
+		      public String getName() {
+		         return this.name;
+		      }
+
+		      public Block getBaseBlock() {
+		         return this.baseBlock;
+		      }
+
+		      public String toString() {
+		         return this.name;
+		      }
+
+		      public static PalmLeavesBlock.Type getType(int i) {
+		         PalmLeavesBlock.Type[] types = values();
+		         if (i < 0 || i >= types.length) {
+		            i = 0;
+		         }
+
+		         return types[i];
+		      }
+
+		      public static PalmLeavesBlock.Type getType(String string) {
+		         PalmLeavesBlock.Type[] types = values();
+
+		         for(int i = 0; i < types.length; ++i) {
+		            if (types[i].getName().equals(string)) {
+		               return types[i];
+		            }
+		         }
+
+		         return types[0];
+		      }
+
+			
+		   }
 	}

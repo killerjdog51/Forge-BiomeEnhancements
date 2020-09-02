@@ -30,25 +30,48 @@ public class StrippedLogHandler {
         BLOCK_STRIPPING_MAP.put(ModBlocks.PALM_WOOD, ModBlocks.STRIPPED_PALM_WOOD);
     }
 
+    // I use an event for the forge version of my mod simply because it's easier. Forge obfuscates all functions/methods and Fields,
+    //so It's a pain to use recursion in Forge (It's possible, just difficult because you either need to find the name prior to obfuscation or know the obfuscated name)
     @SubscribeEvent
-    public void onBlockClicked(PlayerInteractEvent.RightClickBlock event) {
+    public void onBlockClicked(PlayerInteractEvent.RightClickBlock event)
+    {
+    	
+		// If the player's holding an axe item continue
         if (event.getItemStack().getItem() instanceof AxeItem) {
+        	
+        	//Get variables related to the world/block
             World world = event.getWorld();
             BlockPos blockpos = event.getPos();
             BlockState blockstate = world.getBlockState(blockpos);
+            
+			// If the block clicked on is in our map we return the stripped version, otherwise null
             Block block = BLOCK_STRIPPING_MAP.get(blockstate.getBlock());
-            if (block != null) {
+            
+			// If block isn't null continue
+            if (block != null)
+            {
+            	// Get the player instance
                 PlayerEntity playerentity = event.getPlayer();
+                
+				// Play the sound for stripping the log
                 world.playSound(playerentity, blockpos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                if (!world.isRemote) {
+                
+                if (!world.isRemote)
+                {
+					// Replace our log block with the stripped version with the correct orientation
+                	// Palm Logs aren't an instance of LogBlock, so we use the facing enum instead of the axis enum
                 	if (blockstate.getBlock() == ModBlocks.PALM_LOG)
                 	{
                 		 world.setBlockState(blockpos, block.getDefaultState()
                                  .with(RotatedBlock.FACING, blockstate.get(RotatedBlock.FACING)), 11);
-                	} else {
+                	}
+                	else
+                	{
                     world.setBlockState(blockpos, block.getDefaultState()
                             .with(RotatedPillarBlock.AXIS, blockstate.get(RotatedPillarBlock.AXIS)), 11);
                 	}
+                	
+					// Damage the axe if the player isn't in creative
                     if (playerentity != null) {
                         event.getItemStack().damageItem(1, playerentity, (p_220040_1_) -> {
                             p_220040_1_.sendBreakAnimation(event.getHand());

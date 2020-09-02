@@ -50,7 +50,12 @@
 "block.biome_enhancements.palm_door":"Palm Door",
 "block.biome_enhancements.palm_trapdoor":"Palm Trapdoor",
 
-"block.biome_enhancements.desert_candle":"Desert Candle"
+"block.biome_enhancements.desert_candle":"Desert Candle",
 
+"biome.biome_enhancements.oasis":"Oasis",
+
+"item.biome_enhancements.baobab_boat":"Baobab Boat",
+"item.biome_enhancements.mangrove_boat":"Mangrove Boat",
+"item.biome_enhancements.palm_boat":"Palm Boat"
 
 }

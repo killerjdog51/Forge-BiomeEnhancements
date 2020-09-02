@@ -1,5 +1,7 @@
 package io.github.killerjdog51.biome_enhancments.init;
 
+import io.github.killerjdog51.biome_enhancments.entity.boat.ModBoatEntity;
+import io.github.killerjdog51.biome_enhancments.items.ModBoatItem;
 import io.github.killerjdog51.biome_enhancments.items.ModSignItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -74,5 +76,10 @@ public class ModItems {
 	public static final Item BAOBAB_DOOR = new TallBlockItem(ModBlocks.BAOBAB_DOOR, new Item.Properties().group(ItemGroup.REDSTONE));
 	public static final Item MANGROVE_DOOR = new TallBlockItem(ModBlocks.MANGROVE_DOOR, new Item.Properties().group(ItemGroup.REDSTONE));
 	public static final Item PALM_DOOR = new TallBlockItem(ModBlocks.PALM_DOOR, new Item.Properties().group(ItemGroup.REDSTONE));
+	
+	public static final Item BAOBAB_BOAT = new ModBoatItem(ModBoatEntity.Type.BAOBAB, (new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION));
+	public static final Item MANGROVE_BOAT = new ModBoatItem(ModBoatEntity.Type.MANGROVE, (new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION));
+	public static final Item PALM_BOAT = new ModBoatItem(ModBoatEntity.Type.PALM, (new Item.Properties()).maxStackSize(1).group(ItemGroup.TRANSPORTATION));
+
 
 }
